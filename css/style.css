@@ -19,8 +19,7 @@ header {
     padding: 2% 5%;
 }
 
-header img {
-    height: 50px;
+#logo {
     float: left;
     margin-right: 20px;
 }
@@ -32,10 +31,19 @@ header img {
 header button, dialog button {
     border: none;
     background: none;
-    font-size: 30px;
+    font-size: 40px;
     padding: 5px;
-    cursor: pointer;
-    transition: .2s;
+    transition: .3s;
+    background: black;
+    color: white;
+    width: 55px;
+    height: 55px;
+    border-radius: 5px;
+}
+
+#logo button {
+    font-size: 34px;
+    padding: 8px;
 }
 
 button:focus {
@@ -46,20 +54,31 @@ button:hover {
     transform: scale(1.1);
 }
 
-header button {
-    font-size: 40px;
+#buttons button {
     margin-left: 20px;
+    cursor: pointer;
 }
 
 dialog button {
     float: right;
+    font-size: 25px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
 }
 
-#timer {
-    float: left;
+#timer, #title {
     font-size: 50px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
+}
+
+#title {
+    float: left;
+}
+
+#timer {
+    float: right;
 }
 
 #timer input {
@@ -159,10 +178,10 @@ dialog input {
     font-size: 25px;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 768px) {
 
-    #timer {
-        font-size: 40px;
+    #timer, #title {
+        font-size: 30px;
     }
 
     #container, #typing-area {
@@ -181,6 +200,12 @@ dialog input {
 
     .previous, .next {
         padding: 2px 4px;
+    }
+
+    header button, #logo button {
+        font-size: 20px;
+        width: 35px;
+        height: 35px;
     }
 
 

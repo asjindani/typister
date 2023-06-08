@@ -1,6 +1,6 @@
 const container = document.getElementById("container"),
       timerDiv = document.getElementById("timer"),
-      totalWords = 50,
+      totalWords = 100,
 
 	  hours = document.getElementById('hours'),
 	  minutes = document.getElementById('minutes'),

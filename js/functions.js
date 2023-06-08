@@ -231,7 +231,7 @@ function convert(timeLabel=null, returnNums=null) {
     if (returnNums) return [h, m, s];
 
     time = `${h}h ${m}m ${s}s`;
-    if (c) time = "Time: " + time;
+    // if (c) time = "Time: " + time;
 
     return time
 }
