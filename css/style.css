@@ -170,12 +170,18 @@ dialog div {
     margin: 10px;
 }
 
-dialog span {
+dialog label {
     padding: 2.5px 5px;
 }
 
 dialog input {
     font-size: 25px;
+}
+
+dialog .content {
+    display: inline;
+    margin: 0;
+    padding: 0;
 }
 
 @media only screen and (max-width: 768px) {

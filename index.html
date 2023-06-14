@@ -35,15 +35,15 @@
 
         <div id="buttons">
 
-            <button onclick="location.reload();" title="Refresh">
+            <button onclick="setup();" title="Refresh">
                 <i class="fa fa-refresh"></i>
             </button>
 
-            <button onclick="if (!timer.active) toggleDialog(1);" title="Change Time">
+            <button onclick="if (!timer.active) toggleDialog(1);" title="Duration">
                 <i class="fa fa-clock"></i>
             </button>
 
-            <button onclick="if (!timer.active) toggleDialog(0);" title="Performance Details">
+            <button onclick="if (!timer.active) toggleDialog(0);" title="Results">
                 <i class="fa fa-bars"></i>
             </button>
 
@@ -57,25 +57,20 @@
 
     <input type="text" id="typing-area" autofocus="autofocus">
 
-    <dialog>
+    <dialog id="results">
 
-        <button onclick="toggleDialog(0, false)" title="Close"><i class="fa fa-times"></i>
-</button>
+        <button onclick="toggleDialog(0, false)" title="Close"><i class="fa fa-times"></i></button>
 
-        <h2>Performance Details</h2>
+        <h2>Results</h2>
+            <div id="speed"><b>Speed</b><br><span class="content">0</span> wpm</div>
+            <div id="accuracy"><b>Accuracy</b><br><div class="content">0</div>%</div>
 
-        <p>
-            <div id="total-time"><b>Total time taken</b><br>0h 0m 0s</div>
-            <div id="total-words"><b>Total words typed</b><br>0</div>
-        </p>
+            <div id="duration"><b>Duration</b><br><span class="content">0h 0m 0s</span></div>
+            <div id="words"><b>Words</b><br><span class="content">0</span></div>
 
-        <p>
-            <div id="correct"><b>Number of <span style='background: rgb(85, 255, 68);'>correct</span> values</b><br>0</div>
-            <div id="incorrect"><b>Number of <span style='background: rgb(255, 85, 68);'>incorrect</span> values</b><br>0</div>
-            <div id="incomplete"><b>Number of <span style='background: rgb(0, 255, 255);'>incomplete</span> values</b><br>0</div>
-            <div id="accuracy"><b>Accuracy</b><br>0%</div>
-            <div id="wpm"><b>Speed (words per minute)</b><br>0</div>
-        </p>
+            <div id="correct"><b><label style='background: rgb(85, 255, 68);'>Correct</label></b> <span class="content">0</span> values</div>
+            <div id="incorrect"><b><label style='background: rgb(255, 85, 68);'>Incorrect</label></b> <span class="content">0</span> values</div>
+            <div id="incomplete"><b><label style='background: rgb(0, 255, 255);'>Incomplete</label></b> <span class="content">0</span> values</div>
 
     </dialog>
 
@@ -84,7 +79,7 @@
         <button onclick="toggleDialog(1, false)" title="Close"><i class="fa fa-times"></i>
 </button>
 
-        <h2>Change Time</h2>
+        <h2>Duration</h2>
 
         <p>
             Hours: &nbsp;&nbsp;&nbsp;&nbsp;<input id="hours" type="Number" max=23 min=0></input>
@@ -100,6 +95,7 @@
 
     </dialog>
 
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="js/words.js"></script>
     <script src="js/timer.js"></script>
     <script src="js/functions.js"></script>

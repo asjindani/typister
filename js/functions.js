@@ -1,9 +1,5 @@
-///////////////////////////////////////////////////////////////////
-/////////////////////// Start of Setup Block //////////////////////
-///////////////////////////////////////////////////////////////////
-
 // For setting up the container with random words
-function setup(words, length) {
+function randomize(words, length) {
 
 	container.innerHTML = '<div id="previous"></div>';
 
@@ -30,18 +26,6 @@ function setup(words, length) {
     return randomWords;
 }
 
-///////////////////////////////////////////////////////////////////
-/////////////////////// End of Setup Block //////////////////////
-///////////////////////////////////////////////////////////////////
-
-
-
-
-
-///////////////////////////////////////////////////////////////////
-/////////////////////// Start of Timer Block //////////////////////
-///////////////////////////////////////////////////////////////////
-
 function timerCallback() {
     timerDiv.innerHTML = convert();
 
@@ -61,33 +45,21 @@ function timerCallback() {
 
         speed = (correct / totalSeconds * 60).round(1);
 
-        document.getElementById("total-time").innerHTML = `<b>Total time taken</b><br>${convert(totalSeconds)}`;
-        document.getElementById("total-words").innerHTML = `<b>Total words typed</b><br>${total}`;
+        $("#duration .content").text(convert(totalSeconds));
+        $("#words .content").text(total);
 
-        document.getElementById("correct").innerHTML = `<b><span style='background: rgb(85, 255, 68);'>Correct</span> values</b><br>${correct}`;
-        document.getElementById("incorrect").innerHTML = `<b><span style='background: rgb(255, 85, 68);'>Incorrect</span> values</b><br>${incorrect}`;
-        document.getElementById("incomplete").innerHTML = `<b><span style='background: rgb(0, 255, 255);'>Incomplete</span> values</b><br>${incomplete}`;
+        $("#correct .content").text(correct);
+        $("#incorrect .content").text(incorrect);
+        $("#incomplete .content").text(incomplete);
 
-        document.getElementById("accuracy").innerHTML = `<b>Accuracy (%)</b><br>${accuracy}%`;
-        document.getElementById("wpm").innerHTML = `<b>Speed (words/minute)</b><br>${speed} wpm<br>`;
+        $("#accuracy .content").text(accuracy);
+        $("#speed .content").text(speed);
 
-        document.getElementsByTagName("dialog")[0].setAttribute("open", "open");
+        $("#results").attr("open", "open");
 
         timer.stop();
     }
 }
-
-///////////////////////////////////////////////////////////////////
-//////////////////////// End of Timer Block ///////////////////////
-///////////////////////////////////////////////////////////////////
-
-
-
-
-
-///////////////////////////////////////////////////////////////////
-///////////////////// Start of Space Key Block ////////////////////
-///////////////////////////////////////////////////////////////////
 
 x = 0; // This is used to keep track of the position.
 spacebarPressed = false;
@@ -135,19 +107,6 @@ function SpaceKeyPressed(event) {
     }
 }
 
-///////////////////////////////////////////////////////////////////
-////////////////////// End of Space Key Block /////////////////////
-///////////////////////////////////////////////////////////////////
-
-
-
-
-
-///////////////////////////////////////////////////////////////////
-///////////////////// Start of All Keys Block /////////////////////
-///////////////////////////////////////////////////////////////////
-
-correct = 0, incorrect = 0, incomplete = 0;
 typingArea = document.getElementById("typing-area"),
 
 
@@ -205,18 +164,6 @@ typingArea.onkeyup = function(event) {
     }
 }
 
-///////////////////////////////////////////////////////////////////
-////////////////////// End of All Keys Block //////////////////////
-///////////////////////////////////////////////////////////////////
-
-
-
-
-
-///////////////////////////////////////////////////////////////////
-////////////////// Start of Other Functions Block /////////////////
-///////////////////////////////////////////////////////////////////
-
 function convert(timeLabel=null, returnNums=null) {
     if (timeLabel == null) {
         c = true;
@@ -272,7 +219,3 @@ function toggleDialog(n, condition=null) {
 Number.prototype.round = function (dp=0) {
     return +(Math.round(this + "e+" + dp) + "e-" + dp);
 }
-
-///////////////////////////////////////////////////////////////////
-/////////////////// End of Other Functions Block //////////////////
-///////////////////////////////////////////////////////////////////
