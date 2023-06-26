@@ -23,15 +23,23 @@
 
     <header>
 
-        <div id="logo">
+        <div style="float: left;">
 
-            <button title="Logo">
+        <div id="icon">
+
+            <button title="Icon" onclick="location.reload();">
                 <i class="fas fa-keyboard"></i>
             </button>
 
         </div>
 
-        <div id="title">Typister</div>
+        <div id="title">
+            <a href="https://github.com/asjindani/typister" title="Code">Typister</a>
+        </div>
+
+        </div>
+
+        <div style="float: right;">
 
         <div id="buttons">
 
@@ -51,11 +59,13 @@
 
         <div id="timer"></div>
 
+        </div>
+
     </header>
 
     <div id="container"><div id="previous"></div></div>
 
-    <input type="text" id="typing-area" autofocus="autofocus">
+    <input type="text" id="typing-area">
 
     <dialog id="results">
 

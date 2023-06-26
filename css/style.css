@@ -19,7 +19,7 @@ header {
     padding: 2% 5%;
 }
 
-#logo {
+#icon {
     float: left;
     margin-right: 20px;
 }
@@ -39,11 +39,21 @@ header button, dialog button {
     width: 55px;
     height: 55px;
     border-radius: 5px;
+    cursor: pointer;
+    position: relative;
 }
 
-#logo button {
+#icon button {
     font-size: 34px;
-    padding: 8px;
+}
+
+header button i, dialog button i {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 button:focus {
@@ -56,7 +66,6 @@ button:hover {
 
 #buttons button {
     margin-left: 20px;
-    cursor: pointer;
 }
 
 dialog button {
@@ -116,9 +125,6 @@ dialog button {
 }
 
 #typing-area {
-    /*border: 15px solid #f90;
-    border: 15px solid #f54;
-    border: 15px solid #5f4;*/
     border: 15px solid #0ff;
 
     width: calc(90% - 70px);
@@ -184,7 +190,12 @@ dialog .content {
     padding: 0;
 }
 
-@media only screen and (max-width: 768px) {
+a, a:hover, a:active, a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 800px) {
 
     #timer, #title {
         font-size: 30px;
@@ -208,7 +219,7 @@ dialog .content {
         padding: 2px 4px;
     }
 
-    header button, #logo button {
+    header button, #icon button {
         font-size: 20px;
         width: 35px;
         height: 35px;

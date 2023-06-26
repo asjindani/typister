@@ -8,6 +8,7 @@ const container = document.getElementById("container"),
 
 function setup() {
 correct = 0, incorrect = 0, incomplete = 0;
+$("#typing-area").focus();
 
 // Setting up the container with random words.
 randomize(words, totalWords)
