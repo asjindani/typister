@@ -113,7 +113,7 @@ typingArea = document.getElementById("typing-area"),
 // This entire block is for updating the border color of the typingArea.
 typingArea.onkeydown = function(event) {
 
-	if (event.key == " ")
+	if (event.key == " " || event.key == "Enter")
     	SpaceKeyPressed(event);
     else {
     	spacebarPressed = false;
