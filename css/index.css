@@ -1,0 +1,103 @@
+:root {
+    --border-width: 15px;
+    --primary-color: black;
+    --secondary-color: white;
+    --correct-color: black;
+    --incorrect-color: black;
+    --incomplete-color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: white;
+        --secondary-color: black;
+        --correct-color: white;
+        --incorrect-color: white;
+        --incomplete-color: white;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+    font-weight: bold;
+    scrollbar-color: var(--primary-color) var(--secondary-color);
+    text-underline-offset: 0.25em;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    user-select: none;
+    font-size: 32px;
+}
+
+body {
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: grid;
+    row-gap: 2%;
+    grid-template-rows: max-content auto max-content;
+
+    padding: 2% 5%;
+
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+}
+
+button {
+    color: var(--secondary-color);
+    background: var(--primary-color);
+}
+
+button, #customWords label {
+    border: none;
+    font-size: 1rem;
+    padding: 5px;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+button i {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+button:hover, #customWords label:hover {
+    transform: scale(1.05);
+}
+
+dialog button, #customWords label {
+    font-size: 1rem;
+    height: auto;
+    width: auto;
+    padding: 5px 15px;
+}
+
+a, a:hover, a:active, a:visited {
+    color: inherit;
+    text-decoration: none;
+}
+
+input:focus, button:focus, textarea:focus {
+    outline: none;
+}
+
+input {
+    color: inherit;
+    background-color: inherit;
+}

@@ -1,0 +1,80 @@
+#words, #textbox {
+    width: calc(100% - 40px - 2*var(--border-width));
+    border: var(--border-width) solid;
+    font-size: 1rem;
+}
+
+#words{
+    height: calc(100% - 40px - 2*var(--border-width));
+    padding: 20px;
+    word-spacing: 0.1em;
+
+    line-height: 1.5em;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#words .word {
+    padding: .1em .3em;
+    display: inline;
+}
+
+#words .current.word {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+/* For completed words */
+
+#words .correct.word {
+    text-decoration: underline solid 3px;
+}
+
+
+#words .incorrect.word {
+    text-decoration: underline wavy 2px;
+}
+
+#words .incomplete.word {
+    text-decoration: underline blink 3px dashed;
+}
+
+/* Colored previous words */
+
+:root {
+    --correct-color: var(--primary-color);
+    --incorrect-color: var(--primary-color);
+    --incomplete-color: var(--primary-color);
+}
+
+#words .correct.colored.word { 
+    text-decoration-color: var(--correct-color);
+}
+
+#words .incorrect.colored.word {
+    text-decoration-color: var(--incorrect-color);
+}
+
+#words .incomplete.colored.word {
+    text-decoration-color: var(--incomplete-color);
+}
+
+#textbox {
+    height: 50px;
+    padding: 0 20px;
+}
+
+/* Status of current word */
+
+#textbox.correct {
+    border-style: solid;
+}
+
+#textbox.incorrect {
+    border-style: dashed;
+}
+
+#textbox.incomplete {
+    border-style: solid;
+}

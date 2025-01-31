@@ -7,11 +7,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Typister by Ali Shah Jindani</title>
+    <title>Typister by Ali Shah</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <script>
+        // Loading preapplied theme
+        if (localStorage.themeInfo) {
+            let theme = JSON.parse(localStorage.themeInfo)
+            const root = document.querySelector(':root')
+            root.style.setProperty('--primary-color', theme.primary)
+            root.style.setProperty('--secondary-color', theme.bg)
+            root.style.setProperty('--correct-color', theme.c1)
+            root.style.setProperty('--incorrect-color', theme.c2)
+            root.style.setProperty('--incomplete-color', theme.c3)
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/media.css">
+
+    <link rel="stylesheet" href="css/dialog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="images/logo.png">
 
     <!-- Google SEO -->
@@ -22,94 +39,193 @@
 <body>
 
     <header>
-
-        <div style="float: left;">
-
-        <div id="icon">
-
-            <button title="Icon" onclick="location.reload();">
-                <i class="fas fa-keyboard"></i>
-            </button>
-
+        <div id="branding">
+            <button title="Typister" onclick="location.reload();"><i class="fas fa-keyboard"></i></button>
+            <a href="https://github.com/asjindani/typister" title="Learn More">Typister<br>Ali Shah<br>&copy;2020-24</a>
         </div>
-
-        <div id="title">
-            <a href="https://github.com/asjindani/typister" title="Code">Typister</a>
+        <div>
+            <div id="countdown" title="Countdown"><span class="hours">
+                <!-- 0</span>h <span class="minutes">0</span>m <span class="seconds">0</span>s -->
+            </div>
+            <div id="timerStatus" title="Status"></div>
         </div>
-
-        </div>
-
-        <div style="float: right;">
-
-        <div id="buttons">
-
-            <button onclick="setup();" title="Refresh">
-                <i class="fa fa-refresh"></i>
-            </button>
-
-            <button onclick="if (!timer.active) toggleDialog(1);" title="Duration">
-                <i class="fa fa-clock"></i>
-            </button>
-
-            <button onclick="if (!timer.active) toggleDialog(0);" title="Results">
-                <i class="fa fa-bars"></i>
-            </button>
-
-        </div>
-
-        <div id="timer"></div>
-
-        </div>
-
+        <menu>
+            <button class="bars" title="Menu"><i class="fa fa-bars"></i></button>
+            <button id="menuRestart" title="Restart"><i class="fa fa-rotate"></i></button>
+            <button id="menuResults" title="Results"><i class="fa fa-trophy"></i></button>
+            <button id="menuSettings" title="Settings"><i class="fa fa-gear"></i></button>
+        </menu>
     </header>
 
-    <div id="container"><div id="previous"></div></div>
+    <div id="words"></div>
 
-    <input type="text" id="typing-area">
+    <input type="text" id="textbox" spellcheck="false" autocapitalize="false" autocomplete="false" autocorrect="off">
 
     <dialog id="results">
 
-        <button onclick="toggleDialog(0, false)" title="Close"><i class="fa fa-times"></i></button>
+        <button class='closeButton' title="Close"><i class="fa fa-times"></i></button>
 
-        <h2>Results</h2>
-            <div id="speed"><b>Speed</b><br><span class="content">0</span> wpm</div>
-            <div id="accuracy"><b>Accuracy</b><br><div class="content">0</div>%</div>
+        <h1>Statistics&nbsp;&nbsp;&nbsp;</h1>
 
-            <div id="duration"><b>Duration</b><br><span class="content">0h 0m 0s</span></div>
-            <div id="words"><b>Words</b><br><span class="content">0</span></div>
+        <section>
+            <h2>Last Game</h2>
+            <p id="speed">
+                Speed<br>
+                <span class="content"></span> wpm
+            </p>
+            <p id="accuracy">
+                Accuracy<br>
+                <span class="content"></span>%
+            </p>
+            <p id="estwords">
+                Words (Estimated)<br>
+                <span class="content">0</span> words
+            </p>
+            <p id="duration">
+                Duration<br>
+                <span class="content"></span>
+            </p>
+            <p id="speedX">Speed (Extended)<br>
+                <span class="content"></span> wpm
+            </p>
+            <!-- <div id="accuracyX">Accuracy (Extended)<br><span class="content">0</span>%</div> -->
+        </section>
 
-            <div id="correct"><b><label style='background: rgb(85, 255, 68);'>Correct</label></b> <span class="content">0</span> values</div>
-            <div id="incorrect"><b><label style='background: rgb(255, 85, 68);'>Incorrect</label></b> <span class="content">0</span> values</div>
-            <div id="incomplete"><b><label style='background: rgb(0, 255, 255);'>Incomplete</label></b> <span class="content">0</span> values</div>
-
+        <section>
+            <p id="totalChars"><label>Total</label> <span class="content">0</span> chars</p>
+            <p id="correctChars"><label>Correct</label> <span class="content">0</span> chars</p>
+            <p id="incorrectChars"><label>Incorrect</label> <span class="content">0</span> chars</p>
+            <p id="incompleteChars"><label>Incomplete</label> <span class="content">0</span> chars</p>
+        </section>
     </dialog>
 
-    <dialog>
+    <dialog id="settings">
+        <button class='closeButton' title="Close"><i class="fa fa-times"></i></button>
+        
+        <h1>Settings</h1>
+        
+        <section>
+            <form name="settings">
+                <h2>Options</h2>
+                <div>
+                    <input type="checkbox" name="colored" id="colored">
+                    <label for="colored">Colored Underlines</label>
+                </div>
+            </form>
+        </section>
 
-        <button onclick="toggleDialog(1, false)" title="Close"><i class="fa fa-times"></i>
-</button>
+        <section>
+            <h2>Themes</h2>
+
+            <div id="lightThemes">
+                <h3>Light Themes</h3>
+                <p></p>
+            </div>
+
+            <div id="darkThemes">
+                <h3>Dark Themes</h3>
+                <p></p>
+            </div>
+            <div>
+                <h3>Custom Theme</h3>
+                <p>
+                    <button id="customThemeButton">Enter Custom Theme</button>
+                </p>
+            </div>
+        </section>
+
+        <section><form name="duration">
 
         <h2>Duration</h2>
+            <p>Hours</p>
+            <p>
+                <input type="number" name="hours">
+                <!-- <button name="hours+" title="Increment Hours" type="button">+1</button>
+                <button name="hours-" title="Decrement Hours" type="button">-1</button> -->
+            </p>
+            <p>Minutes</p>
+            <p>
+                <input type="number" name="minutes">
+                <!-- <button name="minutes+" title="Increment Minutes" type="button">+1</button>
+                <button name="minutes-" title="Decrement Minutes" type="button">-1</button> -->
+            </p>
+            <p>Seconds</p>
+            <p>
+                <input type="number" name="seconds">
+                <!-- <button name="seconds+" title="Increment Seconds" type="button">+5</button>
+                <button name="seconds-" title="Decrement Seconds" type="button">-5</button> -->
+            </p>
 
-        <p>
-            Hours: &nbsp;&nbsp;&nbsp;&nbsp;<input id="hours" type="Number" max=23 min=0></input>
-        </p>
+        </form></section>
+        
+        <section>
+            <h2>Words</h2>
+            <h3>Word Load</h3>
+                <p>How many words at a time?</p>
+                50 words <button id="changeWordsNumber">Change</button>
+            <h3>Default Wordּs Pack</h3>
+                <p>How many words?</p>
+                <div id="defaultWords"></div>
+            <h3>Custom Words</h3>
+            <div id="customWords">
+                <p>
+                    <button id="setCustomWords">Enter Custom Words</button>
+                    <button id="viewCustomWords">View</button>
+                </p>
+                <p>You can upload your list of words, separated by space, in a text file. This allows you to focus on certain words, or type in other languages. For example, you can upload a file "spanish.txt" with text "uno dos tres cuatro cinco"</p>
+                <p><button id="exportWordsButton">Export Words via File</button></p>
+                <p><label for="wordsFile">Import Words via File</label></p>
+                <p><input type="file" id="wordsFile" style="display: none;"></p>
+            </div>
+        </section>
 
-        <p>
-            Minutes: &nbsp;<input id="minutes" type="Number" max=59 min=0></input>
-        </p>
-
-        <p>
-            Seconds: <input id="seconds" type="Number" max=59 min=0></input>
-        </p>
-
+        <section>
+            <h2>Danger Zone</h2>
+            <p>Be careful! You won't be able recover your data once it has been deleted.</p>
+            <p><button id="clearStorage">Restore Defaults</button></p>
+        </section>
+        
     </dialog>
 
-    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-    <script src="js/words.js"></script>
-    <script src="js/timer.js"></script>
-    <script src="js/functions.js"></script>
-    <script src="js/main.js"></script>
+    <dialog id="emptyDialog" class="fullWindow">
+        <button class='closeButton' title="Close"><i class="fa fa-times"></i></button>
+        <p class="content"></p>
+    </dialog>
+
+    <dialog id="alertBox">
+        <button class='closeButton' title="Close"><i class="fa fa-times"></i></button>
+        <h1>Alert</h1>
+        <p class="content">Lorem ipsum dolor sit amet.</p>
+        <p style="text-align: center;"><button onclick="removeOpen('#alertBox')">Alright</button></p>
+    </dialog>
+
+    <!-- <dialog id="inputBox">
+        <button class='closeButton' title="Close"><i class="fa fa-times"></i></button>
+        <h1>Input</h1>
+        <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste perferendis corrupti magnam dolor molestias, cumque laboriosam velit repellendus vero, saepe fugit. Odio sed adipisci, reprehenderit deleniti in temporibus quisquam vel.</p>
+        <p><button class="close">Okay</button></p>
+    </dialog> -->
+
+    <!-- <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script> -->
+    <!-- <script src="js/modules/timer.js"></script>
+    <script src="js/modules/basic.js"></script>
+    <script src="js/modules/dialogs.js"></script>
+    <script src="js/modules/index.js"></script>
+    <script src="js/modules/settings.js"></script>
+    <script src="js/modules/theme.js"></script>
+    <script src="js/modules/words.js"></script>
+    <script src="js/modules/duration.js"></script>
+    <script src="js/loader.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/textbox.js"></script> -->
+    <script src="js/index.js" type="module"></script>
+
+    <!-- <script type="module">
+
+        import { toggle } from "./js/modules/index.js";
+        window.toggle = toggle
+
+    </script> -->
 
 </body>
 

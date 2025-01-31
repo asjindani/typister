@@ -1,0 +1,36 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row nowrap;
+    /* grid-template-columns: 1fr 1fr 1fr; */
+}
+
+header > :first-child, header > :last-child {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    column-gap: 20px;
+}
+
+header :first-child {
+    justify-content: start;
+}
+
+header :last-child {
+    justify-content: end;
+}
+
+header #branding a {
+    display: inline-block;
+    font-size: 0.55rem;
+}
+
+#countdown {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+#timerStatus {
+    font-size: 0.5rem;
+    text-align: center;
+}

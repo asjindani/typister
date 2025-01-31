@@ -1,0 +1,94 @@
+{
+    "default": {
+        "light": 1,
+        "dark": 0
+    },
+
+    "light": [
+        {
+            "name": "White",
+            "primary": "black",
+            "bg": "white",
+            "c1": "limegreen",
+            "c2": "red",
+            "c3": "blue"
+        },
+        {
+            "name": "Wheat",
+            "bg": "wheat"
+        },
+        {
+            "name": "Sky",
+            "bg": "skyblue"
+        },
+        {
+            "name": "Rose",
+            "bg": "pink"
+        },
+        {
+            "name": "Garden",
+            "bg": "lightgreen",
+            "c1": "green"
+        },
+        {
+            "name": "Banana",
+            "bg": "#ff6"
+        }
+    ],
+
+    "dark": [
+        {
+            "name": "Black",
+            "primary": "white",
+            "bg": "black",
+            "c1": "lime",
+            "c2": "red",
+            "c3": "deepskyblue"
+        },
+        {
+            "name": "Hacker",
+            "primary": "lime",
+            "c1": "white"
+        },
+        {
+            "name": "Minion",
+            "primary": "yellow"
+        },
+        {
+            "name": "Danger",
+            "primary": "red",
+            "c2": "white"
+        },
+        {
+            "name": "Magic",
+            "primary": "magenta"
+        },{
+            "name": "Metal",
+            "primary": "darkgray",
+            "bg": "#111"
+        },
+        {
+            "name": "Orchid",
+            "primary": "darkorchid"
+        },
+        {
+            "name": "Maroon",
+            "bg": "maroon"
+        },
+        {
+            "name": "Crash",
+            "primary": "#bbb",
+            "bg": "navy",
+            "c3": "yellow"
+        },
+        {
+            "name": "Deep",
+            "primary": "deepskyblue",
+            "c3": "yellow"
+        },
+        {
+            "name": "Gold",
+            "primary": "gold"
+        }
+    ]
+}

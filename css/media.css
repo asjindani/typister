@@ -1,0 +1,16 @@
+menu .bars {
+    display: none;
+}
+
+@media only screen and (max-width: 800px) {
+
+    :root {
+        --border-width: 10px;
+    }
+
+    #branding a {
+        display: none;
+    }
+
+}
+
